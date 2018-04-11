@@ -5,7 +5,7 @@ python:
 
 install:
   - pip install -r requirements.txt
-  - source bin/activate
 
 script:
+- cd Tests
 - python -m maintests -v
