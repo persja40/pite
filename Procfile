@@ -1,1 +1,1 @@
-web: python blabla/manage.py runserver
+web: python blabla/manage.py runserver 0.0.0.0:80
