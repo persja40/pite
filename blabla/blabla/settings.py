@@ -130,4 +130,4 @@ STATICFILES_DIRS = (
 
 LOGIN_REDIRECT_URL = 'home'
 
-#django_heroku.settings(locals())
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
