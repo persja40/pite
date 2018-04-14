@@ -2,10 +2,10 @@ import unittest
 
 
 class Tescik(unittest.TestCase):
-    def good(self):
+    def test_good(self):
         self.assertEquals(0, 0)
 
-    def good2(self):
+    def test_good2(self):
         self.assertEquals(1, 1)
 
 
