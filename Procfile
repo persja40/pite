@@ -1,1 +1,1 @@
-web: python blabla/manage.py runserver
+web: gunicorn blablapite.wsgi --log-file -
