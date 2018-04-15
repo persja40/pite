@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from blabla.models import MapModel
+from django_google_maps.widgets import GoogleMapsAddressWidget
 
 
 class SignUpForm(UserCreationForm):
@@ -16,3 +18,12 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name',
                   'email','phone', 'password1', 'password2', )
+
+class MapForm(forms.ModelForm):
+
+    class Meta(object):
+        model = MapModel
+        fields = ['address', 'geolocation']
+        widgets = {
+            "address": GoogleMapsAddressWidget,
+        }

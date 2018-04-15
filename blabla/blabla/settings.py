@@ -25,7 +25,7 @@ SECRET_KEY = 'phwl9(5+41q!giss6bep_zlylox$d_1#gd@$yjp4%1*!%=upny'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blablapite.herokuapp.com']
+ALLOWED_HOSTS = ['blablapite.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_google_maps',
+    'blabla'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,5 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL = 'home'
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyD1D8UPHkQn5H7kMOhwNRyKJt5SYrH7h64'

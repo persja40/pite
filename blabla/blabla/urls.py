@@ -22,7 +22,8 @@ from blabla import views as core_views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^$', core_views.MapFormView.as_view()),
+    # url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^login/$', auth_views.login,
         {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout,
