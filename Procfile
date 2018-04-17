@@ -1,1 +1,1 @@
-web: cd blabla; gunicorn blabla.wsgi --log-file -
+web: gunicorn blabla.wsgi --log-file -
