@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
-from blabla import views as core_views
+from registration import views as core_views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
