@@ -26,10 +26,13 @@ function googleMapAdmin() {
     var autocomplete;
     var geocoder = new google.maps.Geocoder();
     var map;
-    var marker;
+    var marker_start;
+    var marker_end;
 
-    var geolocationId = 'id_geolocation';
-    var addressId = 'id_address';
+    var startId = 'id_start';
+    var endId = 'id_end';
+    var addressStartId = 'id_address_start';
+    var addressEndId = 'id_address_end';
 
     var self = {
         initialize: function() {
@@ -58,7 +61,7 @@ function googleMapAdmin() {
             }
 
             autocomplete = new google.maps.places.Autocomplete(
-                /** @type {!HTMLInputElement} */(document.getElementById(addressId)),
+                /** @type {!HTMLInputElement} */(document.getElementById(addressStartId)),
                 {types: ['geocode']});
 
             // this only triggers on enter, or if a suggested location is chosen
@@ -67,7 +70,7 @@ function googleMapAdmin() {
 
             // don't make enter submit the form, let it just trigger the place_changed event
             // which triggers the map update & geocode
-            $("#" + addressId).keydown(function (e) {
+            $("#" + addressStartId).keydown(function (e) {
                 if (e.keyCode == 13) {  // enter key
                     e.preventDefault();
                     return false;
@@ -77,7 +80,7 @@ function googleMapAdmin() {
 
         getMapType : function() {
             // https://developers.google.com/maps/documentation/javascript/maptypes
-            var geolocation = document.getElementById(addressId);
+            var geolocation = document.getElementById(addressStartId);
             var allowedType = ['roadmap', 'satellite', 'hybrid', 'terrain'];
             var mapType = geolocation.getAttribute('data-map-type');
 
@@ -89,9 +92,13 @@ function googleMapAdmin() {
         },
 
         getExistingLocation: function() {
-            var geolocation = document.getElementById(geolocationId).value;
-            if (geolocation) {
-                return geolocation.split(',');
+            var start = document.getElementById(startId).value;
+            if (start) {
+                return start.split(',');
+            }
+            var end = document.getElementById(endId).value;
+            if (end) {
+                return end.split(',');
             }
         },
 
@@ -116,19 +123,19 @@ function googleMapAdmin() {
         updateWithCoordinates: function(latlng) {
             map.setCenter(latlng);
             map.setZoom(18);
-            self.setMarker(latlng);
+            self.setMarker(marker_start, latlng);
             self.updateGeolocation(latlng);
         },
 
-        setMarker: function(latlng) {
+        setMarker: function(marker, latlng) {
             if (marker) {
-                self.updateMarker(latlng);
+                self.updateMarker(marker, latlng);
             } else {
-                self.addMarker({'latlng': latlng, 'draggable': true});
+                self.addMarker(marker, {'latlng': latlng, 'draggable': true});
             }
         },
 
-        addMarker: function(Options) {
+        addMarker: function(marker, Options) {
             marker = new google.maps.Marker({
                 map: map,
                 position: Options.latlng
@@ -140,20 +147,20 @@ function googleMapAdmin() {
             }
         },
 
-        addMarkerDrag: function() {
+        addMarkerDrag: function(marker) {
             marker.setDraggable(true);
             google.maps.event.addListener(marker, 'dragend', function(new_location) {
                 self.updateGeolocation(new_location.latLng);
             });
         },
 
-        updateMarker: function(latlng) {
+        updateMarker: function(markerlatlng) {
             marker.setPosition(latlng);
         },
 
         updateGeolocation: function(latlng) {
-            document.getElementById(geolocationId).value = latlng.lat() + "," + latlng.lng();
-            $("#" + geolocationId).trigger('change');
+            document.getElementById(startId).value = latlng.lat() + "," + latlng.lng();
+            $("#" + startId).trigger('change');
         }
     };
 

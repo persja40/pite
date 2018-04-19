@@ -2,7 +2,7 @@ from django import test
 from django.core import exceptions
 from django.utils.encoding import force_text
 
-from blabla.django_google_maps import fields
+from django_google_maps import fields
 
 
 class GeoPtFieldTests(test.TestCase):

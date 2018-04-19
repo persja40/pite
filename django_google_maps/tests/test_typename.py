@@ -1,7 +1,7 @@
 from django import test
 from django.utils import six
 
-from blabla.django_google_maps import typename
+from django_google_maps import typename
 
 
 class TypeNameTests(test.TestCase):

@@ -1,7 +1,7 @@
 from django import test
 from django.conf import settings
 
-from blabla.django_google_maps import GoogleMapsAddressWidget
+from django_google_maps import GoogleMapsAddressWidget
 
 
 class WidgetTests(test.TestCase):

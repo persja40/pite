@@ -1,6 +1,6 @@
 from django.db import models
 
-from blabla.django_google_maps import AddressField, GeoLocationField
+from django_google_maps import AddressField, GeoLocationField
 
 
 class Person(models.Model):

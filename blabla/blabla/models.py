@@ -1,6 +1,9 @@
 from django.db import models
 from django_google_maps import fields as map_fields
 
+
 class MapModel(models.Model):
-    address = map_fields.AddressField(max_length=200)
-    geolocation = map_fields.GeoLocationField(max_length=100)
+    address_start = map_fields.AddressField(max_length=200)
+    address_end = map_fields.AddressField(max_length=200)
+    start = map_fields.GeoLocationField(max_length=100)
+    end = map_fields.GeoLocationField(max_length=100)

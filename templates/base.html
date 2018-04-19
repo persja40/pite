@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Django Simple Login{% endblock %}</title>
+    {{form.media}}
 </head>
 
 <body>
     <header>
         <h1>Django Simple Login</h1>
-        {% if user.is_authenticated %} Hi {{ user.username }}!
+        {% if user.is_authenticated %} Hi {{ user.username }}!{{user.profile.phone}}
         <a href="{% url 'logout' %}">logout</a>
         {% else %}
         <a href="{% url 'login' %}">login</a>
