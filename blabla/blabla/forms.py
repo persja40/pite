@@ -8,7 +8,7 @@ class MapForm(forms.ModelForm):
 
     class Meta(object):
         model = MapModel
-        fields = ['address_start', 'address_end', 'start', 'end']
+        fields = ['address_start', 'address_end']
         widgets = {
-            ["address_start", "address_end"]: GoogleMapsAddressWidget,
+            "address_end": GoogleMapsAddressWidget,
         }
