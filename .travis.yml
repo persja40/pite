@@ -7,5 +7,4 @@ install:
   - pip install -r requirements.txt
 
 script:
-- cd Tests
-- python -m maintests -v
+- python manage.py test
