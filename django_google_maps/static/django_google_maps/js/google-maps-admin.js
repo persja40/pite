@@ -36,6 +36,7 @@ function googleMapAdmin() {
 
     var addressStartId = 'id_address_start';
     var addressEndId = 'id_address_end';
+    var waypointsId = 'id_waypoints';
 
     var self = {
         initialize: function() {
@@ -185,6 +186,7 @@ function googleMapAdmin() {
                 console.log(response);
                     directionsDisplay.setDirections(response);
                     directionsDisplay.setMap(map);
+                    document.getElementById(waypointsId).value = JSON.stringify(response);
                 } else {
                     alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
                 }
