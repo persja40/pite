@@ -1,0 +1,6 @@
+{% extends 'base.html' %} {% block title %}Login{% endblock %}
+{% block content %} {{form.as_p}} {% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="/static/django_google_maps/js/google-maps-admin.js"></script>
+{% endblock %}

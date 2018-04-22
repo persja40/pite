@@ -15,5 +15,5 @@ class GoogleMapsAddressWidget(widgets.TextInput):
             'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js',
             'https://maps.google.com/maps/api/js?key={}&libraries=places'.format(
                 settings.GOOGLE_MAPS_API_KEY),
-            settings.STATIC_URL + 'django_google_maps/js/google-maps-admin.js',
+            # settings.STATIC_URL + 'django_google_maps/js/google-maps-admin.js',
         )
