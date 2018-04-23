@@ -23,8 +23,10 @@ from blabla.blabla import views as core_views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^$', core_views.MapFormView.as_view(), name='home'),
-    # url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^add_routes/$', core_views.MapFormView.as_view(), name='add_routes'),
+    # url(r'^$', core_views.MapFormView.as_view(), name='home'),
+    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^view_routes/$', TemplateView.as_view(template_name='home.html'), name='view_routes'),
     url(r'^login/$', auth_views.login,
         {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout,

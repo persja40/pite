@@ -6,4 +6,4 @@ from django.shortcuts import render, redirect
 
 class MapFormView(FormView):
     form_class = MapForm
-    template_name = "home.html"
+    template_name = "add_routes.html"
