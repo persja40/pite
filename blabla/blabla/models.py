@@ -5,7 +5,7 @@ from registration.models import Profile
 
 
 class MapModel(models.Model):
-    user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     address_start = map_fields.AddressField(max_length=500)
     address_end = map_fields.AddressField(max_length=500)
     waypoints = JSONField()

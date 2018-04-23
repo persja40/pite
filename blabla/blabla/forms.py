@@ -11,5 +11,5 @@ class MapForm(forms.ModelForm):
         fields = ['address_start', 'address_end', 'waypoints']
         widgets = {
             "address_end": GoogleMapsAddressWidget,
-            "waypoints": forms.HiddenInput()
+            "waypoints": forms.HiddenInput(),
         }
