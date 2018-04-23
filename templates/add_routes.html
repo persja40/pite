@@ -4,7 +4,7 @@
 <form method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="hidden" name="user_id" value={{user.id}}>
+    <!--<input type="hidden" name="user_id" value={{user.id}}>-->
     <button class="btn bnt-primary" type="submit">Add route</button>
 </form>
 {% endblock %}
