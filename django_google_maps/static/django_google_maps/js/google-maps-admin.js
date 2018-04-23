@@ -36,13 +36,14 @@ function googleMapAdmin() {
 
     var addressStartId = 'id_address_start';
     var addressEndId = 'id_address_end';
-
+    var waypointsId = 'id_waypoints';
     var self = {
         initialize: function() {
             // set up initial map to be world view. also, add change
             // event so changing address will update the map
 //            var existinglocation = self.getExistingLocation();
             directionsDisplay = new google.maps.DirectionsRenderer();
+
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     lat = position.coords.latitude;
@@ -185,6 +186,7 @@ function googleMapAdmin() {
                 console.log(response);
                     directionsDisplay.setDirections(response);
                     directionsDisplay.setMap(map);
+                    document.getElementById(waypointsId).value = JSON.stringify(response);
                 } else {
                     alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
                 }
