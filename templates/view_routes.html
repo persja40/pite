@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %}Login{% endblock %}
+{% block content %}
+    <table>
+        <tr>
+            <th>address_start</th>
+            <th>address_end</th>
+        </tr>
+        {% for ride in rides %}
+            <tr>
+                <td>{{ ride.address_start }}</td>
+                <td>{{ ride.address_end }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
