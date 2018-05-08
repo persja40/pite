@@ -1,6 +1,5 @@
-# Python in the Enterprise - car sharing
-
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+Python in the Enterprise - car sharing
+=========================================
 
 # How to run locally
 - install all requirements
