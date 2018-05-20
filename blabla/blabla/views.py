@@ -17,7 +17,7 @@ class MapFormView(FormView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.instance.user = Profile.objects.get(user=self.request.user)
+            form.instance.user = Profile.objects.get(username=self.request.user)
             form.save()
 
         return render(request, self.template_name, {'form': form})
@@ -25,7 +25,7 @@ class MapFormView(FormView):
 
 @login_required()
 def view_routes(request):
-    object_list = MapModel.objects.all()
+    object_list = MapModel.objects.filter(user=request.user)
     return render(request, 'view_routes.html', {
         'rides': object_list
     })
