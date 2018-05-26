@@ -37,6 +37,10 @@ function googleMapAdmin() {
     var addressStartId = 'id_address_start';
     var addressEndId = 'id_address_end';
     var waypointsId = 'id_waypoints';
+    var addressStartLatId = 'id_address_start_lat';
+    var addressStartLngId = 'id_address_start_lng';
+    var addressEndLatId = 'id_address_end_lat';
+    var addressEndLngId = 'id_address_end_lng';
     var self = {
         initialize: function() {
             // set up initial map to be world view. also, add change
@@ -183,9 +187,12 @@ function googleMapAdmin() {
             };
             directionsService.route(request, function (response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
-                console.log(response);
                     directionsDisplay.setDirections(response);
                     directionsDisplay.setMap(map);
+                    document.getElementById(addressStartLatId).value = startPoint.lat();
+                    document.getElementById(addressStartLngId).value = startPoint.lng();
+                    document.getElementById(addressEndLatId).value = endPoint.lat();
+                    document.getElementById(addressEndLngId).value = endPoint.lng();
                     document.getElementById(waypointsId).value = JSON.stringify(response);
                 } else {
                     alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
