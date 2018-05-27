@@ -3,11 +3,11 @@ from django.contrib.postgres.fields import JSONField
 from django.db.models.fields import FloatField, DateField, IntegerField
 from django_google_maps import fields as map_fields
 from blabla.blabla.fields import IntegerRangeField
-from registration.models import Profile
+from django.contrib.auth.models import User
 from datetime import datetime
 
 class MapModel(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     passengers_number = IntegerField(default=1)
     price = FloatField(default=0.0)
     date = DateField(default=datetime.now())

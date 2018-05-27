@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from blabla.blabla.forms import MapForm
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import FormView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
+
+from blabla.blabla.models import MapModel
 from registration.models import Profile
+
 
 class MapFormView(FormView):
     form_class = MapForm
@@ -12,7 +14,22 @@ class MapFormView(FormView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.instance.user = Profile.objects.get(user=self.request.user)
+            form.instance.user = Profile.objects.get(username=self.request.user)
             form.save()
 
         return render(request, self.template_name, {'form': form})
+
+
+@login_required()
+def view_routes(request):
+    object_list = MapModel.objects.filter(user=request.user)
+    return render(request, 'view_routes.html', {
+        'rides': object_list
+    })
+
+
+@login_required()
+def delete_route(request, object_id):
+    object_to_delete = get_object_or_404(MapModel, pk=object_id)
+    object_to_delete.delete()
+    return redirect('view_routes.html')
