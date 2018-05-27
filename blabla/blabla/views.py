@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 from blabla.blabla.forms import MapForm
 from django.views.generic import FormView
 from django.shortcuts import render, get_object_or_404, redirect
@@ -14,7 +16,7 @@ class MapFormView(FormView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.instance.user = Profile.objects.get(username=self.request.user)
+            form.instance.user = User.objects.get(username=self.request.user)
             form.save()
 
         return render(request, self.template_name, {'form': form})
@@ -32,4 +34,4 @@ def view_routes(request):
 def delete_route(request, object_id):
     object_to_delete = get_object_or_404(MapModel, pk=object_id)
     object_to_delete.delete()
-    return redirect('view_routes.html')
+    return redirect('/view_routes')
