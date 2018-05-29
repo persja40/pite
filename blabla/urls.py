@@ -24,6 +24,7 @@ from blabla.blabla import views as core_views
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^add_routes/$', core_views.MapFormView.as_view(), name='add_routes'),
+    url(r'^search_routes/$', core_views.SearchFormView.as_view(), name='search_routes'),
     # url(r'^$', core_views.MapFormView.as_view(), name='home'),
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^view_routes/$', core_views.view_routes, name='view_routes'),
