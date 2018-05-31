@@ -8,6 +8,7 @@ from datetime import datetime
 class MapModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     passengers_number = IntegerField(default=1)
+    passengers_signed = IntegerField(default=0)
     price = FloatField(default=0.0)
     date = DateField(default=datetime.now())
     hour = IntegerField(default=12)

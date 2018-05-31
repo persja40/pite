@@ -208,15 +208,28 @@ function googleMapAdmin() {
             });
         },
 
-        showRoute: function(route) {
-            console.log(route);
+        showRoute: function(startLat, startLng, endLat, endLng, waypoints) {
+            startPoint = new google.maps.LatLng(startLat, startLng);
+            endPoint = new google.maps.LatLng(endLat, endLng);
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(startPoint);
+            bounds.extend(endPoint);
+            map.fitBounds(bounds);
+            directionsDisplay.setDirections(waypoints);
+            directionsDisplay.setMap(map);
         }
     };
 
     return self;
 }
 
+var googlemap = googleMapAdmin();
+
+var showRouteForm = function(startLat, startLng, endLat, endLng, waypoints) {
+    googlemap.showRoute(startLat, startLng, endLat, endLng, waypoints);
+}
+
 $(document).ready(function() {
-    var googlemap = googleMapAdmin();
     googlemap.initialize();
 });
+

@@ -1,60 +1,103 @@
 {% extends 'base.html' %} {% block title %}Login{% endblock %}
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form method="post">
+                {% csrf_token %}
                 <div class="form-group">
-                   <label for="id_address_start">Address start:</label>
-                    <input class="form-control" type="text" name="address_start" maxlength="500" required id="id_address_start"/>
+                    <label for="id_address_start">Address start:</label>
+                    <input class="form-control" type="text" name="address_start" maxlength="500" required
+                           id="id_address_start"/>
 
                     <label for="id_address_end">Address end:</label>
-                    <input class="form-control" type="text" name="address_end" maxlength="500" required id="id_address_end"/>
+                    <input class="form-control" type="text" name="address_end" maxlength="500" required
+                           id="id_address_end"/>
 
                     <input type="hidden" name="address_start_lat" id="id_address_start_lat"/>
                     <input type="hidden" name="address_start_lng" id="id_address_start_lng"/>
                     <input type="hidden" name="address_end_lat" id="id_address_end_lat"/>
-                    <input type="hidden" name="address_end_lng" id="id_address_end_lng" />
+                    <input type="hidden" name="address_end_lng" id="id_address_end_lng"/>
 
-                    <button class="btn bnt-primary" type="submit">Search routes</button>
+                    <button class="btn bnt-primary" name="search" type="submit">Search routes</button>
                 </div>
-            </div>
-
-            <div class="col-6">
-                <div id="map_canvas"></div>
-            </div>
+            </form>
         </div>
 
-        <div class="row">
-            {% if routes %}
-            <h2>Found routes:</h2>
-            <table class="table table-hover table-stripped table-responsive">
-                <tr>
-                    <th>Start adress</th>
-                    <th>End adress</th>
-                    <th>Date</th>
-                    <th>Hour</th>
-                    <th>Price</th>
-                </tr>
-                {% for route in routes %}
-                    <tr>
-                        <td>{{ route.address_start }}</td>
-                        <td>{{ route.address_end }}</td>
-                        <td>{{ route.date }}</td>
-                        <td>{{ route.hour }}</td>
-                        <td>{{ route.price }}</td>
-                        <td><button class="btn bnt-primary">Show</button></td>
-                    </tr>
-                {% endfor %}
-            </table>
-            {% endif %}
+        <div class="col-6">
+            <div id="map_canvas"></div>
         </div>
     </div>
-</form>
+
+    <div class="row">
+        {% if routes %}
+        <h2>Found routes:</h2>
+        <table class="table table-hover table-stripped table-responsive">
+            <tr>
+                <th>Start adress</th>
+                <th>End adress</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Price</th>
+                <th>Signed / Passengers</th>
+            </tr>
+            {% for route in routes %}
+            <tr>
+                <td>{{ route.address_start }}</td>
+                <td>{{ route.address_end }}</td>
+                <td>{{ route.date }}</td>
+                <td>{{ route.hour }}</td>
+                <td>{{ route.price }}</td>
+                <td>{{ route.passengers_signed }} / {{ route.passengers_number }}</td>
+                <td>
+                    <button class="btn bnt-primary"
+                            onClick="showRouteForm({{route.address_start_lat}},
+                                {{route.address_start_lng}},
+                                {{route.address_end_lat}},
+                                {{route.address_end_lng}},
+                                {{route.waypoints}})">Show
+                    </button>
+                </td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="route_id" id="id_route_id" value="{{route.id}}"/>
+                        <button class="btn bnt-primary" name="sign" type="submit">Sign for route</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        {% if signed_message %}
+        <h4> {{ signed_message }} </h4>
+        {% if route_details %}
+        <table class="table table-hover table-stripped table-responsive">
+            <tr>
+                <th>Start adress</th>
+                <th>End adress</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td>{{ route_details.address_start }}</td>
+                <td>{{ route_details.address_end }}</td>
+                <td>{{ route_details.date }}</td>
+                <td>{{ route_details.hour }}</td>
+                <td>{{ route_details.price }}</td>
+            </tr>
+        </table>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
 {% block scripts %}
-    {{ block.super }}
-    <script src="/static/django_google_maps/js/google-maps-admin.js"></script>
+{{ block.super }}
+<script src="/static/django_google_maps/js/google-maps-admin.js"></script>
 {% endblock %}
