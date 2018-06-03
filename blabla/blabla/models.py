@@ -22,9 +22,10 @@ class MapModel(models.Model):
 
 class SearchModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    address_start = map_fields.AddressField(max_length=500)
-    address_end = map_fields.AddressField(max_length=500)
-    address_start_lat = FloatField()
-    address_start_lng = FloatField()
-    address_end_lat = FloatField()
-    address_end_lng = FloatField()
+    route_id = models.ManyToManyField('MapModel')
+    # address_start = map_fields.AddressField(max_length=500)
+    # address_end = map_fields.AddressField(max_length=500)
+    # address_start_lat = FloatField()
+    # address_start_lng = FloatField()
+    # address_end_lat = FloatField()
+    # address_end_lng = FloatField()
