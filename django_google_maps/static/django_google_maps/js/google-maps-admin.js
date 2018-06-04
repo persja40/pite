@@ -41,6 +41,14 @@ function googleMapAdmin() {
     var addressStartLngId = 'id_address_start_lng';
     var addressEndLatId = 'id_address_end_lat';
     var addressEndLngId = 'id_address_end_lng';
+
+    var searchAddressStartId = 'id_search_address_start';
+    var searchAddressEndId = 'id_search_address_end';
+    var searchAddressStartLatId = 'id_search_address_start_lat';
+    var searchAddressStartLngId = 'id_search_address_start_lng';
+    var searchAddressEndLatId = 'id_search_address_end_lat';
+    var searchAddressEndLngId = 'id_search_address_end_lng';
+
     var self = {
         initialize: function() {
             // set up initial map to be world view. also, add change
@@ -198,13 +206,30 @@ function googleMapAdmin() {
                     alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
                 }
             });
+        },
+
+        showRoute: function(startLat, startLng, endLat, endLng, waypoints) {
+            startPoint = new google.maps.LatLng(startLat, startLng);
+            endPoint = new google.maps.LatLng(endLat, endLng);
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(startPoint);
+            bounds.extend(endPoint);
+            map.fitBounds(bounds);
+            directionsDisplay.setDirections(waypoints);
+            directionsDisplay.setMap(map);
         }
     };
 
     return self;
 }
 
+var googlemap = googleMapAdmin();
+
+var showRouteForm = function(startLat, startLng, endLat, endLng, waypoints) {
+    googlemap.showRoute(startLat, startLng, endLat, endLng, waypoints);
+}
+
 $(document).ready(function() {
-    var googlemap = googleMapAdmin();
     googlemap.initialize();
 });
+

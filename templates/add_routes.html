@@ -3,9 +3,43 @@
 
 <form method="post">
     {% csrf_token %}
-    {{form.as_p}}
-    <!--<input type="hidden" name="user_id" value={{user.id}}>-->
-    <button class="btn bnt-primary" type="submit">Add route</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="id_passengers_number">Passengers number:</label>
+                    <input class="form-control" type="number" name="passengers_number" max=5 value="1" required id="id_passengers_number"/>
+
+                    <label for="id_price">Price:</label>
+                    <input class="form-control" type="number" name="price" min=0 value="0.0" required id="id_price"/>
+
+                    <label for="id_date">Date:</label>
+                    <input class="form-control" type="date" name="date" required id="id_date"/>
+
+                    <label for="id_hour">Hour:</label>
+                    <input class="form-control" type="number" name="hour" value="12" required id="id_hour"/>
+
+                   <label for="id_address_start">Address start:</label>
+                    <input class="form-control" type="text" name="address_start" required id="id_address_start"/>
+
+                    <label for="id_address_end">Address end:</label>
+                    <input class="form-control" type="text" name="address_end" required id="id_address_end"/>
+
+                    <input type="hidden" name="address_start_lat" id="id_address_start_lat"/>
+                    <input type="hidden" name="address_start_lng" id="id_address_start_lng"/>
+                    <input type="hidden" name="address_end_lat" id="id_address_end_lat"/>
+                    <input type="hidden" name="address_end_lng" id="id_address_end_lng" />
+                    <input type="hidden" name="waypoints" id="id_waypoints" />
+
+                    <button class="btn bnt-primary" type="submit">Add route</button>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div id="map_canvas"></div>
+            </div>
+        </div>
+    </div>
 </form>
 {% endblock %}
 {% block scripts %}

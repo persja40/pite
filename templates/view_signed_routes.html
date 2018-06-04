@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block title %}Login{% endblock %}
+{% block content %}
+    <table class="table table-hover table-stripped table-responsive">
+        <tr>
+            <th>Address start</th>
+            <th>Address end</th>
+            <th>Date</th>
+            <th>Hour</th>
+            <th>Price</th>
+        </tr>
+        {% for ride in rides %}
+            <tr>
+                <td>{{ ride.address_start }}</td>
+                <td>{{ ride.address_end }}</td>
+                <td>{{ ride.date }}</td>
+                <td>{{ ride.hour }}</td>
+                <td>{{ ride.price }}</td>
+                <td><a href="{% url 'sign_off_route' ride.id ride.signed_id %}">Resign from route</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
